@@ -17,6 +17,11 @@ class User {
         this.password = p;
     }
 
+    public User(String n ,String p){
+        this.username = n;
+        this.password = p;
+    }
+
     public void log(){
         Log.e("name",this.username);
         Log.e("pass",this.password);

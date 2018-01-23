@@ -15,4 +15,7 @@ import retrofit2.http.POST;
 public interface ApiService {
     @POST("/api/v1/auth/create")
     Call<ApiToken> createUser(@Body User user);
+
+    @POST("/api/v1/auth/login")
+    Call<ApiToken> login(@Body User user);
 }
