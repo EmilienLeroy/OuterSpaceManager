@@ -1,8 +1,10 @@
 package fr.emilienleroy.outerspacemanager;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.util.Log;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -12,9 +14,28 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.TextView;
+
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
+
+    private String Token;
+    private ArrayList<String> player = new ArrayList<String>();
+    private TextView user_text;
+    private TextView gas_text;
+    private TextView mine_text;
+    private TextView points_text;
+    private TextView name;
+    private TextView point;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,6 +43,12 @@ public class MainActivity extends AppCompatActivity
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl("https://outer-space-manager.herokuapp.com")
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+        ApiService service = retrofit.create(ApiService.class);
+
 
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -32,6 +59,40 @@ public class MainActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+        View nav = navigationView.getHeaderView(0);
+        name = (TextView) nav.findViewById(R.id.name);
+        point = (TextView) nav.findViewById(R.id.point);
+
+        Token = getIntent().getStringExtra("TOKEN");
+        user_text = (TextView) findViewById(R.id.username);
+        gas_text = (TextView) findViewById(R.id.gas);
+        mine_text = (TextView) findViewById(R.id.mine);
+        points_text = (TextView) findViewById(R.id.points);
+
+        setup(Token,service);
+
+    }
+
+    public void setup(String token,ApiService api) {
+        Call<ApiUser> user = api.currentuser(token);
+        user.enqueue(new Callback<ApiUser>() {
+            @Override
+            public void onResponse(Call<ApiUser> call, Response<ApiUser> response) {
+                user_text.setText(response.body().getUser());
+                name.setText(response.body().getUser());
+                gas_text.setText(response.body().getGas().toString());
+                mine_text.setText(Integer.toString(response.body().getMinerals()));
+                points_text.setText(response.body().getPoints().toString());
+                point.setText(response.body().getPoints().toString());
+            }
+
+            @Override
+            public void onFailure(Call<ApiUser> call, Throwable t) {
+
+            }
+        });
+
     }
 
     @Override
@@ -86,4 +147,5 @@ public class MainActivity extends AppCompatActivity
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
+
 }
