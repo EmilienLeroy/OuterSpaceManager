@@ -27,4 +27,7 @@ public interface ApiService {
 
     @POST("/api/v1/buildings/create/{buildingId}")
     Call<ApiBuilding> createBuilding(@Header("x-access-token") String token,@Path("buildingId") int buildingID);
+
+    @GET("/api/v1/buildings/list")
+    Call<ApiBuilding> getBuilding(@Header("x-access-token") String token);
 }

@@ -32,6 +32,7 @@ public class BuildingActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         Token = getIntent().getStringExtra("TOKEN");
+        loadBuilding();
         add_button = (FloatingActionButton) findViewById(R.id.fab);
         add_button.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -41,8 +42,23 @@ public class BuildingActivity extends AppCompatActivity {
         });
     }
 
+    private void loadBuilding() {
+        Call<ApiBuilding> building = service.getBuilding(Token);
+        building.enqueue(new Callback<ApiBuilding>() {
+            @Override
+            public void onResponse(Call<ApiBuilding> call, Response<ApiBuilding> response) {
+                Log.e("build",Integer.toString(response.body().getBuiding()));
+            }
+
+            @Override
+            public void onFailure(Call<ApiBuilding> call, Throwable t) {
+                Log.e("et",t.getLocalizedMessage());
+            }
+        });
+    }
+
     private void add_building(View v) {
-        Call<ApiBuilding> building = service.createBuilding(Token,0);
+        Call<ApiBuilding> building = service.createBuilding(Token,1);
         building.enqueue(new Callback<ApiBuilding>() {
             @Override
             public void onResponse(Call<ApiBuilding> call, Response<ApiBuilding> response) {
