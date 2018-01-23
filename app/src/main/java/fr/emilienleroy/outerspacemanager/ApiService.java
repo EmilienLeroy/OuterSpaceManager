@@ -9,6 +9,7 @@ import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.Header;
 import retrofit2.http.POST;
+import retrofit2.http.Path;
 
 /**
  * Created by eleroy on 16/01/2018.
@@ -23,4 +24,7 @@ public interface ApiService {
 
     @GET("/api/v1/users/get")
     Call<ApiUser> currentuser(@Header("x-access-token") String token);
+
+    @POST("/api/v1/buildings/create/{buildingId}")
+    Call<ApiBuilding> createBuilding(@Header("x-access-token") String token,@Path("buildingId") int buildingID);
 }
