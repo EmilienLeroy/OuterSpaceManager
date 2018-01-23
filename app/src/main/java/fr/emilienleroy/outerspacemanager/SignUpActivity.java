@@ -1,5 +1,6 @@
 package fr.emilienleroy.outerspacemanager;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
@@ -9,6 +10,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.Set;
 
@@ -79,8 +81,10 @@ public class SignUpActivity extends AppCompatActivity {
                     savetoken(response.body().getToken());
                     Token = response.body().getToken();
                     Log.e("OK", "onResponse: ok");
+                    mainActivity(Token);
                 } else {
                     Log.e("erreur",response.toString());
+                    toast();
                 }
             }
 
@@ -88,6 +92,21 @@ public class SignUpActivity extends AppCompatActivity {
             public void onFailure(Call<ApiToken> call, Throwable t) {
             }
         });
+    }
+
+    private void toast() {
+        Context context = getApplicationContext();
+        CharSequence text = "User ou Pass faux";
+        int duration = Toast.LENGTH_SHORT;
+
+        Toast toast = Toast.makeText(context, text, duration);
+        toast.show();
+    }
+
+    private void mainActivity(String token) {
+        Intent intent = new Intent(getBaseContext(), MainActivity.class);
+        intent.putExtra("TOKEN", token);
+        startActivity(intent);
     }
 
     private String loadtoken() {
