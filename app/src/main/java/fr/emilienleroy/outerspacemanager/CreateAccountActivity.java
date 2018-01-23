@@ -42,8 +42,7 @@ public class CreateAccountActivity extends AppCompatActivity {
     }
 
     private void Connect(View v) {
-        User user = new User(name.getText().toString(),password.getText().toString(),mail.getText().toString());
-
+        User user = new User(mail.getText().toString(),name.getText().toString(),password.getText().toString());
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl("https://outer-space-manager.herokuapp.com")
                 .addConverterFactory(GsonConverterFactory.create())
@@ -54,18 +53,16 @@ public class CreateAccountActivity extends AppCompatActivity {
         repo.enqueue(new Callback<ApiToken>() {
             @Override
             public void onResponse(Call<ApiToken> call, Response<ApiToken> response) {
-                Log.v("sdfs",response.toString());
                 if (response.isSuccessful()) {
-                    System.out.print(response.body().getToken());
-                    Log.e("sfg", "onResponse: ok");
+                    Log.e("token",response.body().getToken());
+                    Log.e("OK", "onResponse: ok");
                 } else {
-                    Log.e("sfg", "onResponse: erruer");
+                    Log.e("erreur",response.toString());
                 }
             }
 
             @Override
             public void onFailure(Call<ApiToken> call, Throwable t) {
-                System.out.print(t);
             }
         });
     }
