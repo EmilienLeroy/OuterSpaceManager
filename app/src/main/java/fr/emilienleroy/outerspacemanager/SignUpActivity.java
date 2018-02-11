@@ -37,7 +37,6 @@ public class SignUpActivity extends AppCompatActivity {
         setContentView(R.layout.activity_signup);
         save = getSharedPreferences("PREFS", MODE_PRIVATE);
         Token = loadtoken();
-        Log.e("Token",Token);
 
         login = (EditText) findViewById(R.id.login);
         password = (EditText) findViewById(R.id.password);
