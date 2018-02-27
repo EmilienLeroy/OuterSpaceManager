@@ -1,4 +1,4 @@
-package fr.emilienleroy.outerspacemanager;
+package fr.emilienleroy.outerspacemanager.activity;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -7,8 +7,10 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
-import java.util.List;
-
+import fr.emilienleroy.outerspacemanager.ApiService;
+import fr.emilienleroy.outerspacemanager.R;
+import fr.emilienleroy.outerspacemanager.models.ApiToken;
+import fr.emilienleroy.outerspacemanager.models.User;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;

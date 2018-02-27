@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ImageView
+        android:id="@+id/backgroundColor"
+        android:layout_width="match_parent"
+        android:layout_height="125dp"
+        tools:background="#BBB"
+        android:adjustViewBounds= "true"
+        android:scaleType="centerCrop"/>
+
+    <ImageView
+        android:id="@+id/imgBG"
+        android:layout_width="match_parent"
+        android:layout_height="125dp"
+        tools:background="#BBB"
+        android:adjustViewBounds= "true"
+        android:scaleType="centerCrop"/>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="10dp">
+
+        <ImageView
+            android:id="@+id/logo"
+            android:layout_marginTop="@dimen/fab_margin"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            tools:background="#FFF" />
+
+        <TextView
+            android:id="@+id/informations"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_toEndOf="@+id/logo"
+            android:textColor="@android:color/background_light"
+            android:textStyle="bold"
+            tools:text="ID" />
+
+        <TextView
+            android:id="@+id/effects"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignStart="@+id/informations"
+            android:layout_below="@+id/informations"
+            android:textColor="@android:color/background_light"
+            tools:text="Effects :" />
+
+        <TextView
+            android:id="@+id/gas_cost"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignStart="@+id/informations"
+            android:layout_below="@+id/effects"
+            android:textColor="@android:color/background_light"
+            tools:text="Gas (cost) :" />
+
+        <TextView
+            android:id="@+id/minerals_cost"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignStart="@+id/informations"
+            android:layout_below="@+id/gas_cost"
+            android:textColor="@android:color/background_light"
+            tools:text="Minerals (cost) :" />
+
+        <TextView
+            android:id="@+id/timetoBuild"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignStart="@+id/informations"
+            android:layout_below="@+id/minerals_cost"
+            android:textColor="@android:color/background_light"
+            tools:text="Time to build :" />
+
+        <TextView
+            android:id="@+id/level"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_below="@+id/effects"
+            android:textColor="@android:color/background_light"
+            android:textSize="20sp"
+            tools:text="Level 10" />
+
+    </RelativeLayout>
+
+
+</RelativeLayout>

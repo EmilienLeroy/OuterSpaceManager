@@ -1,10 +1,10 @@
-package fr.emilienleroy.outerspacemanager;
+package fr.emilienleroy.outerspacemanager.models;
 
 /**
  * Created by eleroy on 23/01/2018.
  */
 
-class ApiUser {
+public class ApiUser {
     private String username;
     private Double gas;
     private Double minerals;

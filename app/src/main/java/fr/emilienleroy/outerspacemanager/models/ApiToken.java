@@ -1,4 +1,4 @@
-package fr.emilienleroy.outerspacemanager;
+package fr.emilienleroy.outerspacemanager.models;
 
 import java.sql.Timestamp;
 
@@ -7,7 +7,7 @@ import java.sql.Timestamp;
  */
 
 
-class ApiToken {
+public class ApiToken {
     private String token;
     public String getToken(){
         return token;

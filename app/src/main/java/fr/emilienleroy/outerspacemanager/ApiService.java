@@ -1,11 +1,12 @@
 package fr.emilienleroy.outerspacemanager;
 
-import java.util.List;
-
+import fr.emilienleroy.outerspacemanager.models.ApiBuilding;
+import fr.emilienleroy.outerspacemanager.models.ApiToken;
+import fr.emilienleroy.outerspacemanager.models.ApiUser;
+import fr.emilienleroy.outerspacemanager.models.ResponseListBuilding;
+import fr.emilienleroy.outerspacemanager.models.User;
 import retrofit2.Call;
 import retrofit2.http.Body;
-import retrofit2.http.Field;
-import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.Header;
 import retrofit2.http.POST;
@@ -26,8 +27,8 @@ public interface ApiService {
     Call<ApiUser> currentuser(@Header("x-access-token") String token);
 
     @POST("/api/v1/buildings/create/{buildingId}")
-    Call<ApiBuilding> createBuilding(@Header("x-access-token") String token,@Path("buildingId") int buildingID);
+    Call<ApiBuilding> createBuilding(@Header("x-access-token") String token, @Path("buildingId") int buildingID);
 
     @GET("/api/v1/buildings/list")
-    Call<ApiBuilding> getBuilding(@Header("x-access-token") String token);
+    Call<ResponseListBuilding> getBuilding(@Header("x-access-token") String token);
 }

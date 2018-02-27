@@ -1,10 +1,7 @@
-package fr.emilienleroy.outerspacemanager;
+package fr.emilienleroy.outerspacemanager.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
-import android.util.Log;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -16,9 +13,12 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
+import fr.emilienleroy.outerspacemanager.ApiService;
+import fr.emilienleroy.outerspacemanager.R;
+import fr.emilienleroy.outerspacemanager.activity.BuildingActivity;
+import fr.emilienleroy.outerspacemanager.models.ApiUser;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;

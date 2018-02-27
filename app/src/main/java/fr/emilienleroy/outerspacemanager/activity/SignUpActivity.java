@@ -1,4 +1,4 @@
-package fr.emilienleroy.outerspacemanager;
+package fr.emilienleroy.outerspacemanager.activity;
 
 import android.content.Context;
 import android.content.Intent;
@@ -9,18 +9,19 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
 
-import java.util.Set;
-
+import fr.emilienleroy.outerspacemanager.ApiService;
+import fr.emilienleroy.outerspacemanager.R;
+import fr.emilienleroy.outerspacemanager.activity.CreateAccountActivity;
+import fr.emilienleroy.outerspacemanager.activity.MainActivity;
+import fr.emilienleroy.outerspacemanager.models.ApiToken;
+import fr.emilienleroy.outerspacemanager.models.User;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
-import retrofit2.http.GET;
-import retrofit2.http.Path;
 
 public class SignUpActivity extends AppCompatActivity {
 

@@ -1,4 +1,4 @@
-package fr.emilienleroy.outerspacemanager;
+package fr.emilienleroy.outerspacemanager.models;
 
 import android.util.Log;
 
@@ -6,7 +6,7 @@ import android.util.Log;
  * Created by eleroy on 16/01/2018.
  */
 
-class User {
+public class User {
     private String username;
     private String password;
     private  String email;
