@@ -39,11 +39,9 @@ public class BuildingActivity extends AppCompatActivity {
         setContentView(R.layout.activity_building);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        ListBuild = (ListView) findViewById(R.id.listbuilding);
+        ListBuild = (ListView) findViewById(R.id.listB);
         Token = getIntent().getStringExtra("TOKEN");
-
         loadBuilding();
-
     }
 
     private void loadBuilding() {
@@ -51,14 +49,10 @@ public class BuildingActivity extends AppCompatActivity {
         building.enqueue(new Callback<ResponseListBuilding>() {
             @Override
             public void onResponse(Call<ResponseListBuilding> call, Response<ResponseListBuilding> response) {
-                int i;
-                ResponseListBuilding listbuilding = response.body();
-                BuildingAdapter adapter = new BuildingAdapter(BuildingActivity.this, ListBuilding);
+                ResponseListBuilding responseBuilding = response.body();
+                List<ApiBuilding> building = responseBuilding.getBuilding();
+                BuildingAdapter adapter = new BuildingAdapter(BuildingActivity.this, building);
                 ListBuild.setAdapter(adapter);
-                for(i=0; i<listbuilding.getSize(); i++)
-                {
-
-                }
             }
 
             @Override
@@ -68,6 +62,7 @@ public class BuildingActivity extends AppCompatActivity {
         });
     }
 
+    /*
     private void add_building(View v) {
         Call<ApiBuilding> building = service.createBuilding(Token,1);
         building.enqueue(new Callback<ApiBuilding>() {
@@ -81,5 +76,5 @@ public class BuildingActivity extends AppCompatActivity {
 
             }
         });
-    }
+    }*/
 }

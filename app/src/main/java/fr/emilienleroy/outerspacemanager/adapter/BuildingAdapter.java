@@ -3,6 +3,7 @@ package fr.emilienleroy.outerspacemanager.adapter;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewDebug;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
@@ -33,18 +34,18 @@ public class BuildingAdapter extends ArrayAdapter<ApiBuilding> {
         BuildingViewHolder viewHolder = (BuildingViewHolder) convertView.getTag();
         if(viewHolder == null){
             viewHolder = new BuildingViewHolder();
-            viewHolder.id = (TextView) convertView.findViewById(R.id.informations);
+            viewHolder.informations = (TextView) convertView.findViewById(R.id.informations);
             convertView.setTag(viewHolder);
         }
 
         ApiBuilding building = getItem(position);
 
-        viewHolder.id.setText(building.getBuildingId());
+        viewHolder.informations.setText(String.valueOf(building.getBuildingId()));
 
         return convertView;
     }
 
     private class BuildingViewHolder{
-        public TextView id;
+        public TextView informations;
     }
 }
