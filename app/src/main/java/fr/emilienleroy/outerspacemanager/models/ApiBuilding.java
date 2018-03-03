@@ -12,6 +12,10 @@ import java.lang.reflect.Array;
 public class ApiBuilding {
     private String code;
     private Integer buildingId;
+    private Integer level;
+    private String effect;
+    private String imageUrl;
+    private String name;
 
     public String getCode(){
         return code;
@@ -20,4 +24,12 @@ public class ApiBuilding {
     public Integer getBuildingId(){
         return buildingId;
     }
+
+    public Integer getLevel() {return level;}
+
+    public String getEffect() {return effect;}
+
+    public String getImageUrl() {return imageUrl;}
+
+    public String getName() {return name;}
 }
