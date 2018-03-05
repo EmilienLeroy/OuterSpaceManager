@@ -139,8 +139,10 @@ public class MainActivity extends AppCompatActivity
             Intent intent = new Intent(getBaseContext(), BuildingActivity.class);
             intent.putExtra("TOKEN", Token);
             startActivity(intent);
-        } else if (id == R.id.nav_slideshow) {
-
+        } else if (id == R.id.nav_fleet) {
+            Intent intent = new Intent(getBaseContext(), FleetActivity.class);
+            intent.putExtra("TOKEN", Token);
+            startActivity(intent);
         } else if (id == R.id.nav_manage) {
 
         }
