@@ -1,12 +1,18 @@
 package fr.emilienleroy.outerspacemanager.activity;
 
+import android.app.AlertDialog;
+import android.content.Context;
+import android.content.DialogInterface;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -42,6 +48,35 @@ public class BuildingActivity extends AppCompatActivity {
         ListBuild = (ListView) findViewById(R.id.listB);
         Token = getIntent().getStringExtra("TOKEN");
         loadBuilding();
+        ListBuild.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                loadAlert(position);
+            }
+        });
+    }
+
+    private void loadAlert(final int position) {
+        AlertDialog.Builder builder;
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            builder = new AlertDialog.Builder(BuildingActivity.this, android.R.style.Theme_Material_Dialog_Alert);
+        } else {
+            builder = new AlertDialog.Builder(BuildingActivity.this);
+        }
+        builder.setTitle("Créer un building")
+                .setMessage("Attention vous allez créer un building")
+                .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        add_building(position);
+                    }
+                })
+                .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        // do nothing
+                    }
+                })
+                .setIcon(android.R.drawable.ic_dialog_alert)
+                .show();
     }
 
     private void loadBuilding() {
@@ -62,19 +97,33 @@ public class BuildingActivity extends AppCompatActivity {
         });
     }
 
-    /*
-    private void add_building(View v) {
-        Call<ApiBuilding> building = service.createBuilding(Token,1);
+
+    private void add_building(int position) {
+        Call<ApiBuilding> building = service.createBuilding(Token,position);
         building.enqueue(new Callback<ApiBuilding>() {
             @Override
             public void onResponse(Call<ApiBuilding> call, Response<ApiBuilding> response) {
-                Log.e("build",response.body().getCode());
+                if(response.code() == 200){
+                    toast("Building créé");
+                }else{
+                    toast("Impossible de créer le building !!");
+                }
+
             }
 
             @Override
             public void onFailure(Call<ApiBuilding> call, Throwable t) {
-
+                toast("Impossible de créer le building");
             }
         });
-    }*/
+    }
+
+    private void toast(String newtext) {
+        Context context = getApplicationContext();
+        CharSequence text = newtext;
+        int duration = Toast.LENGTH_SHORT;
+
+        Toast toast = Toast.makeText(context, text, duration);
+        toast.show();
+    }
 }

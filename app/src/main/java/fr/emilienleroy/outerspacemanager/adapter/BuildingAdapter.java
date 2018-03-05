@@ -48,7 +48,11 @@ public class BuildingAdapter extends ArrayAdapter<ApiBuilding> {
         ApiBuilding building = getItem(position);
 
         viewHolder.informations.setText("ID: "+String.valueOf(building.getBuildingId()));
-        viewHolder.level.setText("Level "+String.valueOf(building.getLevel()));
+        if(building.getLevel() == null){
+            viewHolder.level.setText("Level UP");
+        }else{
+            viewHolder.level.setText("Level "+String.valueOf(building.getLevel()));
+        }
         viewHolder.effect.setText("Effect: "+ building.getEffect());
         viewHolder.name.setText("Name: "+building.getName());
         Picasso.with(getContext()).load(building.getImageUrl()).into(viewHolder.logo);
