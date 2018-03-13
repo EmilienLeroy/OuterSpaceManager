@@ -4,6 +4,7 @@ import fr.emilienleroy.outerspacemanager.models.ApiBuilding;
 import fr.emilienleroy.outerspacemanager.models.ApiToken;
 import fr.emilienleroy.outerspacemanager.models.ApiUser;
 import fr.emilienleroy.outerspacemanager.models.ResponseListBuilding;
+import fr.emilienleroy.outerspacemanager.models.ResponseListShip;
 import fr.emilienleroy.outerspacemanager.models.User;
 import retrofit2.Call;
 import retrofit2.http.Body;
@@ -31,4 +32,7 @@ public interface ApiService {
 
     @GET("/api/v1/buildings/list")
     Call<ResponseListBuilding> getBuilding(@Header("x-access-token") String token);
+
+    @GET("/api/v1/ships")
+    Call<ResponseListShip> getShips(@Header("x-access-token") String token);
 }

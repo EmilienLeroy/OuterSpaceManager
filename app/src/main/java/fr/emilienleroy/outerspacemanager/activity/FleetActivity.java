@@ -8,11 +8,13 @@ import fr.emilienleroy.outerspacemanager.fragment.FleetFragment;
 
 public class FleetActivity extends AppCompatActivity {
 
+    private String Token;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_fleet);
-
+        Token = getIntent().getStringExtra("TOKEN");
         
     }
 }

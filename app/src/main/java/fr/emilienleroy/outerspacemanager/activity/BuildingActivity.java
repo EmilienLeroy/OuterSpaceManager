@@ -67,7 +67,7 @@ public class BuildingActivity extends AppCompatActivity {
                 .setMessage("Attention vous allez créer un building")
                 .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
-                        add_building(position);
+                        addBuilding(position);
                     }
                 })
                 .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
@@ -98,7 +98,7 @@ public class BuildingActivity extends AppCompatActivity {
     }
 
 
-    private void add_building(int position) {
+    private void addBuilding(int position) {
         Call<ApiBuilding> building = service.createBuilding(Token,position);
         building.enqueue(new Callback<ApiBuilding>() {
             @Override

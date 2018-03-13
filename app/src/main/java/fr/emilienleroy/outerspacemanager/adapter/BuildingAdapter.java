@@ -23,8 +23,8 @@ import fr.emilienleroy.outerspacemanager.models.ApiBuilding;
 
 public class BuildingAdapter extends ArrayAdapter<ApiBuilding> {
 
-    public BuildingAdapter(Context context, List<ApiBuilding> tweets) {
-        super(context, 0, tweets);
+    public BuildingAdapter(Context context, List<ApiBuilding> buildings) {
+        super(context, 0, buildings);
     }
 
     @Override
