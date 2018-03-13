@@ -1,11 +1,13 @@
 package fr.emilienleroy.outerspacemanager.fragment;
 
-import android.app.Fragment;
+import android.app.FragmentTransaction;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -27,7 +29,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
  * Created by eleroy on 05/03/2018.
  */
 
-public class FleetFragment extends Fragment {
+public class ShipFragment extends Fragment {
 
     private ListView listFleet;
     private String Token;
@@ -48,6 +50,7 @@ public class FleetFragment extends Fragment {
         listFleet = (ListView) view.findViewById(R.id.listfleet);
         Token = getActivity().getIntent().getExtras().getString("TOKEN");
         loadFleet();
+        listFleet.setOnItemClickListener((FleetActivity)getActivity());
     }
 
     private void loadFleet() {
