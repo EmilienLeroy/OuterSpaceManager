@@ -30,6 +30,7 @@ public class FleetActivity extends AppCompatActivity implements AdapterView.OnIt
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         Bundle bundle = new Bundle();
         bundle.putInt("ID", position );
+        bundle.putString("TOKEN",Token);
         ShipDetailsFragment nextFrag = new ShipDetailsFragment();
         nextFrag.setArguments(bundle);
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();

@@ -1,8 +1,10 @@
 package fr.emilienleroy.outerspacemanager;
 
 import fr.emilienleroy.outerspacemanager.models.ApiBuilding;
+import fr.emilienleroy.outerspacemanager.models.ApiShip;
 import fr.emilienleroy.outerspacemanager.models.ApiToken;
 import fr.emilienleroy.outerspacemanager.models.ApiUser;
+import fr.emilienleroy.outerspacemanager.models.RequestCreateShip;
 import fr.emilienleroy.outerspacemanager.models.ResponseListBuilding;
 import fr.emilienleroy.outerspacemanager.models.ResponseListShip;
 import fr.emilienleroy.outerspacemanager.models.User;
@@ -10,6 +12,7 @@ import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
 import retrofit2.http.Header;
+import retrofit2.http.Headers;
 import retrofit2.http.POST;
 import retrofit2.http.Path;
 
@@ -35,4 +38,11 @@ public interface ApiService {
 
     @GET("/api/v1/ships")
     Call<ResponseListShip> getShips(@Header("x-access-token") String token);
+
+    @GET("/api/v1/ships/{sheepId}")
+    Call<ApiShip> getShip(@Header("x-access-token") String token, @Path("sheepId") int sheepID);
+
+    @Headers("Content-Type: application/json")
+    @POST("/api/v1/ships/create/{sheepId}")
+    Call<ApiShip> createShip(@Header("x-access-token") String token, @Path("sheepId") int sheepID,@Body RequestCreateShip amount);
 }
