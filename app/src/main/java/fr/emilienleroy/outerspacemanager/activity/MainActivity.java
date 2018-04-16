@@ -11,6 +11,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -36,6 +37,7 @@ public class MainActivity extends AppCompatActivity
     private TextView points_text;
     private TextView name;
     private TextView point;
+    private ProgressBar progressBarMain;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,7 +46,7 @@ public class MainActivity extends AppCompatActivity
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("https://outer-space-manager.herokuapp.com")
+                .baseUrl("https://outer-space-manager-staging.herokuapp.com")
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
         ApiService service = retrofit.create(ApiService.class);
@@ -52,6 +54,7 @@ public class MainActivity extends AppCompatActivity
 
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        progressBarMain = (ProgressBar) findViewById(R.id.progressBarMain);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
@@ -79,6 +82,7 @@ public class MainActivity extends AppCompatActivity
         user.enqueue(new Callback<ApiUser>() {
             @Override
             public void onResponse(Call<ApiUser> call, Response<ApiUser> response) {
+                progressBarMain.setVisibility(View.GONE);
                 user_text.setText(response.body().getUser());
                 name.setText(response.body().getUser());
                 gas_text.setText(response.body().getGas().toString());

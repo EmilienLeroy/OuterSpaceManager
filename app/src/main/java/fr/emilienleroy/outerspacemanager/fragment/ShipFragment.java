@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import java.util.List;
@@ -34,10 +35,11 @@ public class ShipFragment extends Fragment {
     private ListView listFleet;
     private String Token;
     private Retrofit retrofit = new Retrofit.Builder()
-            .baseUrl("https://outer-space-manager.herokuapp.com")
+            .baseUrl("https://outer-space-manager-staging.herokuapp.com")
             .addConverterFactory(GsonConverterFactory.create())
             .build();
     private ApiService service = retrofit.create(ApiService.class);
+    private ProgressBar progressBarSheet;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -48,6 +50,7 @@ public class ShipFragment extends Fragment {
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         listFleet = (ListView) view.findViewById(R.id.listfleet);
+        progressBarSheet = (ProgressBar) view.findViewById(R.id.progressBarFleet);
         Token = getActivity().getIntent().getExtras().getString("TOKEN");
         loadFleet();
         listFleet.setOnItemClickListener((FleetActivity)getActivity());
@@ -58,6 +61,7 @@ public class ShipFragment extends Fragment {
         ships.enqueue(new Callback<ResponseListShip>() {
             @Override
             public void onResponse(Call<ResponseListShip> call, Response<ResponseListShip> response) {
+                progressBarSheet.setVisibility(View.GONE);
                 ResponseListShip responseShip = response.body();
                 List<ApiShip> ships = responseShip.getShips();
                 ShipAdapter adapter = new ShipAdapter(getActivity(), ships);

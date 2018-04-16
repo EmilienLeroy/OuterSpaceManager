@@ -12,6 +12,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -34,16 +35,18 @@ public class BuildingActivity extends AppCompatActivity {
     private List<ApiBuilding> ListBuilding = new ArrayList<>();
     private String Token;
     private Retrofit retrofit = new Retrofit.Builder()
-            .baseUrl("https://outer-space-manager.herokuapp.com")
+            .baseUrl("https://outer-space-manager-staging.herokuapp.com")
             .addConverterFactory(GsonConverterFactory.create())
             .build();
     private ApiService service = retrofit.create(ApiService.class);
+    private ProgressBar progressBarBuilding;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_building);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        progressBarBuilding = (ProgressBar) findViewById(R.id.progressBarBuilding);
         setSupportActionBar(toolbar);
         ListBuild = (ListView) findViewById(R.id.listB);
         Token = getIntent().getStringExtra("TOKEN");
@@ -84,6 +87,7 @@ public class BuildingActivity extends AppCompatActivity {
         building.enqueue(new Callback<ResponseListBuilding>() {
             @Override
             public void onResponse(Call<ResponseListBuilding> call, Response<ResponseListBuilding> response) {
+                progressBarBuilding.setVisibility(View.GONE);
                 ResponseListBuilding responseBuilding = response.body();
                 List<ApiBuilding> building = responseBuilding.getBuilding();
                 BuildingAdapter adapter = new BuildingAdapter(BuildingActivity.this, building);

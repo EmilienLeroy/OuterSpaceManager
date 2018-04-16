@@ -44,7 +44,7 @@ public class ShipDetailsFragment extends Fragment {
     private int shipId;
     private String Token;
     private Retrofit retrofit = new Retrofit.Builder()
-            .baseUrl("https://outer-space-manager.herokuapp.com")
+            .baseUrl("https://outer-space-manager-staging.herokuapp.com")
             .addConverterFactory(GsonConverterFactory.create())
             .build();
     private ApiService service = retrofit.create(ApiService.class);

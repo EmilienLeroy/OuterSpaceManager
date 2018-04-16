@@ -67,7 +67,7 @@ public class SignUpActivity extends AppCompatActivity {
     private void Connect(View v) {
         User user = new User(login.getText().toString(),password.getText().toString());
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("https://outer-space-manager.herokuapp.com")
+                .baseUrl("https://outer-space-manager-staging.herokuapp.com")
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
 

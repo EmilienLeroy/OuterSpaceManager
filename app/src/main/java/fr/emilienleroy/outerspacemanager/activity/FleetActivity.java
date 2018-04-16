@@ -34,6 +34,7 @@ public class FleetActivity extends AppCompatActivity implements AdapterView.OnIt
         ShipDetailsFragment nextFrag = new ShipDetailsFragment();
         nextFrag.setArguments(bundle);
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+        ft.setCustomAnimations(R.anim.slide_in_left, R.anim.slide_out_right);
         ft.replace(R.id.fragmentLayout, nextFrag);
         ft.commit();
     }
