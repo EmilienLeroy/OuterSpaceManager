@@ -85,7 +85,7 @@ public class MainActivity extends AppCompatActivity
                 progressBarMain.setVisibility(View.GONE);
                 user_text.setText(response.body().getUser());
                 name.setText(response.body().getUser());
-                gas_text.setText(response.body().getGas().toString());
+                gas_text.setText(Integer.toString(response.body().getGas()));
                 mine_text.setText(Integer.toString(response.body().getMinerals()));
                 points_text.setText(response.body().getPoints().toString());
                 point.setText(response.body().getPoints().toString());

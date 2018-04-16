@@ -12,8 +12,9 @@ public class ApiUser {
     public String getUser(){
         return username;
     }
-    public Double getGas(){
-        return gas;
+    public int getGas(){
+        int g = ((int)(gas*100))/100;
+        return g;
     }
     public int getMinerals(){
         int mine = ((int)(minerals*100))/100;

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/back"
+    tools:context="fr.emilienleroy.outerspacemanager.activity.FleetActivity">
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:orientation="horizontal"
+        android:layout_width="match_parent" android:layout_height="match_parent">
+
+        <fragment class="fr.emilienleroy.outerspacemanager.fragment.ShipFragment"
+            android:id="@+id/all" android:layout_weight="1"
+            android:layout_width="0px" android:layout_height="match_parent" />
+
+        <FrameLayout android:id="@+id/details" android:layout_weight="1"
+            android:layout_width="0px" android:layout_height="match_parent"
+            android:background="?android:attr/detailsElementBackground" />
+
+    </LinearLayout>
+
+</android.support.constraint.ConstraintLayout>
