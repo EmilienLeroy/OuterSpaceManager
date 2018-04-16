@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/back"
     tools:context="fr.emilienleroy.outerspacemanager.activity.CreateAccountActivity">
 
     <EditText
@@ -15,8 +16,11 @@
         android:layout_marginTop="8dp"
         android:ems="10"
         android:hint="Password"
+        android:padding="20px"
         android:inputType="textPassword"
+        android:background="@drawable/gradient"
         android:text=""
+        android:textColor="@color/colorWhite"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/Nom" />
@@ -29,9 +33,12 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:ems="10"
+        android:padding="20px"
+        android:background="@drawable/gradient"
         android:inputType="textPersonName"
         android:text=""
         android:hint="Email"
+        android:textColor="@color/colorWhite"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/Pass" />
@@ -47,6 +54,9 @@
         android:inputType="textPersonName"
         android:text=""
         android:hint="Nom"
+        android:padding="20px"
+        android:background="@drawable/gradient"
+        android:textColor="@color/colorWhite"
         android:focusable="true"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
