@@ -7,6 +7,7 @@ import fr.emilienleroy.outerspacemanager.models.ApiUser;
 import fr.emilienleroy.outerspacemanager.models.RequestCreateShip;
 import fr.emilienleroy.outerspacemanager.models.ResponseListBuilding;
 import fr.emilienleroy.outerspacemanager.models.ResponseListShip;
+import fr.emilienleroy.outerspacemanager.models.ResponseListUsers;
 import fr.emilienleroy.outerspacemanager.models.User;
 import retrofit2.Call;
 import retrofit2.http.Body;
@@ -41,6 +42,9 @@ public interface ApiService {
 
     @GET("/api/v1/ships/{sheepId}")
     Call<ApiShip> getShip(@Header("x-access-token") String token, @Path("sheepId") int sheepID);
+
+    @GET("/api/v1/users/{from}/{limit}")
+    Call<ResponseListUsers> getRank(@Header("x-access-token") String token, @Path("from") int from, @Path("limit") int limit);
 
     @Headers("Content-Type: application/json")
     @POST("/api/v1/ships/create/{sheepId}")

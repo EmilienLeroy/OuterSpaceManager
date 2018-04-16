@@ -149,7 +149,12 @@ public class MainActivity extends AppCompatActivity
             startActivity(intent);
         } else if (id == R.id.nav_manage) {
 
+        } else if (id == R.id.nav_ranking) {
+            Intent intent = new Intent(getBaseContext(), RankingActivity.class);
+            intent.putExtra("TOKEN", Token);
+            startActivity(intent);
         }
+
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);

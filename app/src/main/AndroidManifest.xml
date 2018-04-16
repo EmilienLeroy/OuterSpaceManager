@@ -27,8 +27,12 @@
             android:name=".activity.BuildingActivity"
             android:label="@string/title_activity_building"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".activity.FleetActivity"
-            android:label="@string/title_activity_fleet"/>
+        <activity
+            android:name=".activity.FleetActivity"
+            android:label="@string/title_activity_fleet" />
+        <activity
+            android:label="@string/title_activity_ranking"
+            android:name=".activity.RankingActivity"/>
     </application>
 
 </manifest>
