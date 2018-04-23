@@ -11,13 +11,13 @@
         android:orientation="horizontal"
         android:layout_width="match_parent" android:layout_height="match_parent">
 
-        <fragment class="fr.emilienleroy.outerspacemanager.fragment.ShipFragment"
+        <FrameLayout class="fr.emilienleroy.outerspacemanager.fragment.ShipFragment"
             android:id="@+id/all" android:layout_weight="1"
             android:layout_width="0px" android:layout_height="match_parent" />
 
         <FrameLayout android:id="@+id/details" android:layout_weight="1"
             android:layout_width="0px" android:layout_height="match_parent"
-            android:background="?android:attr/detailsElementBackground" />
+            />
 
     </LinearLayout>
 
