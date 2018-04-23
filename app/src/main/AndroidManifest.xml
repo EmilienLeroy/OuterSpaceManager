@@ -31,8 +31,10 @@
             android:name=".activity.FleetActivity"
             android:label="@string/title_activity_fleet" />
         <activity
-            android:label="@string/title_activity_ranking"
-            android:name=".activity.RankingActivity"/>
+            android:name=".activity.RankingActivity"
+            android:label="@string/title_activity_ranking" />
+        <activity android:name=".activity.AttackActivity"
+            android:label="@string/title_activity_attack" ></activity>
     </application>
 
 </manifest>

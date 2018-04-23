@@ -153,6 +153,10 @@ public class MainActivity extends AppCompatActivity
             Intent intent = new Intent(getBaseContext(), RankingActivity.class);
             intent.putExtra("TOKEN", Token);
             startActivity(intent);
+        } else if (id == R.id.nav_fight) {
+            Intent intent = new Intent(getBaseContext(), AttackActivity.class);
+            intent.putExtra("TOKEN", Token);
+            startActivity(intent);
         }
 
 

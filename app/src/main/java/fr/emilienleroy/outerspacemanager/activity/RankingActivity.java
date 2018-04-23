@@ -46,7 +46,7 @@ public class RankingActivity extends AppCompatActivity {
     }
 
     private void loadRank() {
-        Call<ResponseListUsers> rank = service.getRank(Token, 0, 10);
+        Call<ResponseListUsers> rank = service.getRank(Token, 0, 20);
         rank.enqueue(new Callback<ResponseListUsers>() {
             @Override
             public void onResponse(Call<ResponseListUsers> call, Response<ResponseListUsers> response) {
