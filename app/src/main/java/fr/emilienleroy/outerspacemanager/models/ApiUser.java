@@ -9,9 +9,11 @@ public class ApiUser {
     private Double gas;
     private Double minerals;
     private Double points;
+
     public String getUser(){
         return username;
     }
+
     public int getGas(){
         int g = ((int)(gas*100))/100;
         return g;

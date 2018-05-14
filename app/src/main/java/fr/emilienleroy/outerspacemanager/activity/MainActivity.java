@@ -147,8 +147,6 @@ public class MainActivity extends AppCompatActivity
             Intent intent = new Intent(getBaseContext(), FleetActivity.class);
             intent.putExtra("TOKEN", Token);
             startActivity(intent);
-        } else if (id == R.id.nav_manage) {
-
         } else if (id == R.id.nav_ranking) {
             Intent intent = new Intent(getBaseContext(), RankingActivity.class);
             intent.putExtra("TOKEN", Token);

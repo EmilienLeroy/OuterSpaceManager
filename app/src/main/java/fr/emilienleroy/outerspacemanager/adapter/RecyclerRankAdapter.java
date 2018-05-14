@@ -24,8 +24,10 @@ public class RecyclerRankAdapter extends RecyclerView.Adapter<RecyclerRankAdapte
     private final int VIEW_PROG = 0;
     private LoadData loadData;
     private boolean loading = false;
+    View.OnClickListener clickListener;
 
-    public static class ViewHolder extends RecyclerView.ViewHolder {
+
+    public static class ViewHolder extends RecyclerView.ViewHolder{
         public TextView name;
         public TextView points;
 
@@ -41,6 +43,8 @@ public class RecyclerRankAdapter extends RecyclerView.Adapter<RecyclerRankAdapte
         loadData = onLoadData;
     }
 
+
+
     @Override
     public RecyclerRankAdapter.ViewHolder onCreateViewHolder(ViewGroup parent,
                                                    int viewType) {
@@ -51,6 +55,12 @@ public class RecyclerRankAdapter extends RecyclerView.Adapter<RecyclerRankAdapte
         View rankView = inflater.inflate(R.layout.row_rank, parent, false);
 
         ViewHolder viewHolder = new ViewHolder(rankView);
+        viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                clickListener.onClick(view);
+            }
+        });
         return viewHolder;
     }
 
@@ -90,5 +100,12 @@ public class RecyclerRankAdapter extends RecyclerView.Adapter<RecyclerRankAdapte
         notifyDataSetChanged();
     }
 
+    public void setClickListener(View.OnClickListener callback) {
+        clickListener = callback;
+    }
+
+    public ApiUser getItem(int position) {
+        return listRank.get(position);
+    }
 
 }

@@ -4,8 +4,11 @@ import android.content.res.Configuration;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.AdapterView;
 
 import fr.emilienleroy.outerspacemanager.R;
+import fr.emilienleroy.outerspacemanager.fragment.AttackFragment;
 import fr.emilienleroy.outerspacemanager.fragment.RankFragment;
 import fr.emilienleroy.outerspacemanager.fragment.ShipFragment;
 
@@ -32,6 +35,7 @@ public class AttackActivity extends AppCompatActivity {
         }
 
         Token = getIntent().getStringExtra("TOKEN");
-
     }
+
+
 }

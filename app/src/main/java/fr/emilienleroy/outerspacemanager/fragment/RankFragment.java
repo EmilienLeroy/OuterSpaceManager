@@ -1,8 +1,10 @@
 package fr.emilienleroy.outerspacemanager.fragment;
 
+import android.content.res.Configuration;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -75,8 +77,33 @@ public class RankFragment extends Fragment {
             }
         });
         recyclerRank.setAdapter(adapterRank);
+
+        adapterRank.setClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                int pos = recyclerRank.getChildAdapterPosition(v);
+                ApiUser user = adapterRank.getItem(pos);
+                loadAttackFragment(user);
+            }
+        });
         loadUser();
         return  view;
+    }
+
+    private void loadAttackFragment(ApiUser user) {
+        Bundle bundle = new Bundle();
+        bundle.putString("username",user.getUser());
+        AttackFragment attackFragment = new AttackFragment();
+        attackFragment.setArguments(bundle);
+        FragmentTransaction ft = getFragmentManager().beginTransaction();
+        ft.setCustomAnimations(R.anim.slide_in_left, R.anim.slide_out_right);
+        int currentOrientation = getResources().getConfiguration().orientation;
+        if (currentOrientation == Configuration.ORIENTATION_LANDSCAPE) {
+            ft.replace(R.id.details, attackFragment);
+        }else{
+            ft.replace(R.id.fragmentLayoutRank, attackFragment);
+        }
+        ft.commit();
     }
 
     private void updateUser(int skip) {
@@ -128,4 +155,5 @@ public class RankFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
     }
+
 }

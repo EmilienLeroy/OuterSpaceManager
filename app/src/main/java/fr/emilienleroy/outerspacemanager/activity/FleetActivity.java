@@ -51,7 +51,6 @@ public class FleetActivity extends AppCompatActivity implements AdapterView.OnIt
             ft.replace(R.id.details, nextFrag);
             ft.commit();
         }else{
-
             ShipDetailsFragment nextFrag = new ShipDetailsFragment();
             nextFrag.setArguments(bundle);
             FragmentTransaction ft = getSupportFragmentManager().beginTransaction();

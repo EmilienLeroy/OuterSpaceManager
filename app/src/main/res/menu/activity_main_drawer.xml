@@ -19,24 +19,12 @@
             android:title="Flotte" />
         <item
             android:id="@+id/nav_fight"
-            android:icon="@drawable/flotte"
+            android:icon="@drawable/galaxy"
             android:title="Fight" />
         <item
             android:id="@+id/nav_ranking"
             android:icon="@drawable/ic_people_black_24dp"
             android:title="Classement" />
-        <item
-            android:id="@+id/nav_manage"
-            android:icon="@drawable/search"
-            android:title="Recherches" />
-        <item
-            android:id="@+id/nav_chant"
-            android:icon="@drawable/ic_menu_manage"
-            android:title="Chantier spatial" />
-        <item
-            android:id="@+id/nav_galx"
-            android:icon="@drawable/galaxy"
-            android:title="Chantier galaxy" />
     </group>
 
 </menu>
