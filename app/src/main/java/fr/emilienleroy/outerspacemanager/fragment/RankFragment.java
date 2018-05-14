@@ -93,6 +93,7 @@ public class RankFragment extends Fragment {
     private void loadAttackFragment(ApiUser user) {
         Bundle bundle = new Bundle();
         bundle.putString("username",user.getUser());
+        bundle.putString("TOKEN",Token);
         AttackFragment attackFragment = new AttackFragment();
         attackFragment.setArguments(bundle);
         FragmentTransaction ft = getFragmentManager().beginTransaction();

@@ -37,6 +37,9 @@ public interface ApiService {
     @GET("/api/v1/buildings/list")
     Call<ResponseListBuilding> getBuilding(@Header("x-access-token") String token);
 
+    @GET("/api/v1/fleet/list")
+    Call<ResponseListShip> getFleet(@Header("x-access-token") String token);
+
     @GET("/api/v1/ships")
     Call<ResponseListShip> getShips(@Header("x-access-token") String token);
 

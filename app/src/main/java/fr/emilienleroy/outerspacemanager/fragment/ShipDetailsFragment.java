@@ -142,9 +142,9 @@ public class ShipDetailsFragment extends Fragment {
             @Override
             public void onResponse(Call<ApiShip> call, Response<ApiShip> response) {
                 if(response.code() == 200){
-                    toast("Building créé");
+                    toast("Navire créé");
                 }else{
-                    toast("Impossible de créer le building !!");
+                    toast("Impossible de créer le navire !!");
                 }
             }
 
