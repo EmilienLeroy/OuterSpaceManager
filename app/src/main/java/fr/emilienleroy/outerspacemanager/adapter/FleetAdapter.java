@@ -38,6 +38,7 @@ public class FleetAdapter extends ArrayAdapter<ApiShip> {
             viewHolder.life = (TextView) convertView.findViewById(R.id.life);
             viewHolder.speed = (TextView) convertView.findViewById(R.id.speed);
             viewHolder.amountBar = (SeekBar) convertView.findViewById(R.id.amount);
+            viewHolder.seekBarValue = (TextView) convertView.findViewById(R.id.seekbarvalue);
             convertView.setTag(viewHolder);
         }
 
@@ -46,8 +47,11 @@ public class FleetAdapter extends ArrayAdapter<ApiShip> {
         viewHolder.name.setText("Name: "+String.valueOf(ship.getName()));
         viewHolder.life.setText("LIFE "+String.valueOf(ship.getLife()));
         viewHolder.speed.setText("Speed: "+String.valueOf(ship.getSpeed()));
+        viewHolder.seekBarValue.setText("Amount : "+String.valueOf(ship.getAmount()));
         viewHolder.amountBar.setMax(ship.getAmount());
         viewHolder.amountBar.setProgress(ship.getAmount()/4);
+
+
         return convertView;
     }
 
@@ -56,6 +60,7 @@ public class FleetAdapter extends ArrayAdapter<ApiShip> {
         public TextView name;
         public TextView life;
         public TextView speed;
+        public TextView seekBarValue;
         public SeekBar amountBar;
     }
 }

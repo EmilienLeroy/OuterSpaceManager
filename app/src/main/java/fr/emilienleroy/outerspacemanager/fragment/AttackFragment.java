@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -34,6 +35,7 @@ public class AttackFragment extends Fragment {
     private String username;
     private TextView textViewUsername;
     private ListView listFleet;
+    private SeekBar amount;
 
     private Retrofit retrofit = new Retrofit.Builder()
             .baseUrl("https://outer-space-manager-staging.herokuapp.com")
@@ -42,6 +44,7 @@ public class AttackFragment extends Fragment {
     private ApiService service = retrofit.create(ApiService.class);
     private String Token;
     private Button btnAttack;
+    private FleetAdapter adapter;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -55,15 +58,21 @@ public class AttackFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         listFleet = (ListView) view.findViewById(R.id.listfleet);
         btnAttack = (Button) view.findViewById(R.id.btn_attack);
+        amount = (SeekBar) view.findViewById(R.id.amount);
         textViewUsername = (TextView) view.findViewById(R.id.name);
         textViewUsername.setText("Name : "+username);
         btnAttack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                toast("Sorry, this feature will be create soon.");
+                attackUser();
+                //toast("Sorry, this feature will be create soon.");
             }
         });
         loadFleet();
+    }
+
+    private void attackUser() {
+        
     }
 
     private void loadFleet() {
@@ -73,7 +82,7 @@ public class AttackFragment extends Fragment {
             public void onResponse(Call<ResponseListShip> call, Response<ResponseListShip> response) {
                 ResponseListShip responseShip = response.body();
                 List<ApiShip> ships = responseShip.getShips();
-                FleetAdapter adapter = new FleetAdapter(getActivity(), ships);
+                adapter = new FleetAdapter(getActivity(), ships);
                 listFleet.setAdapter(adapter);
             }
 

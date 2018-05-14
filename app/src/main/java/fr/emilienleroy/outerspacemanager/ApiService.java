@@ -4,6 +4,7 @@ import fr.emilienleroy.outerspacemanager.models.ApiBuilding;
 import fr.emilienleroy.outerspacemanager.models.ApiShip;
 import fr.emilienleroy.outerspacemanager.models.ApiToken;
 import fr.emilienleroy.outerspacemanager.models.ApiUser;
+import fr.emilienleroy.outerspacemanager.models.RequestAttack;
 import fr.emilienleroy.outerspacemanager.models.RequestCreateShip;
 import fr.emilienleroy.outerspacemanager.models.ResponseListBuilding;
 import fr.emilienleroy.outerspacemanager.models.ResponseListShip;
@@ -52,4 +53,8 @@ public interface ApiService {
     @Headers("Content-Type: application/json")
     @POST("/api/v1/ships/create/{sheepId}")
     Call<ApiShip> createShip(@Header("x-access-token") String token, @Path("sheepId") int sheepID,@Body RequestCreateShip amount);
+
+    @Headers("Content-Type: application/json")
+    @POST("/api/v1/fleet/attack/{userName}")
+    Call<ApiShip> attackUser(@Header("x-access-token") String token, @Path("userName") String userName,@Body RequestAttack ship);
 }
