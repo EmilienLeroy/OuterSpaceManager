@@ -19,6 +19,7 @@ import fr.emilienleroy.outerspacemanager.R;
 import fr.emilienleroy.outerspacemanager.activity.AttackActivity;
 import fr.emilienleroy.outerspacemanager.activity.FleetActivity;
 import fr.emilienleroy.outerspacemanager.activity.RankingActivity;
+import fr.emilienleroy.outerspacemanager.adapter.LoadData;
 import fr.emilienleroy.outerspacemanager.adapter.RankAdapter;
 import fr.emilienleroy.outerspacemanager.adapter.RecyclerRankAdapter;
 import fr.emilienleroy.outerspacemanager.models.ApiUser;
@@ -40,36 +41,78 @@ public class RankFragment extends Fragment {
     private RecyclerRankAdapter adapterRank;
     private RecyclerView.LayoutManager layoutManager;
     private ProgressBar progressBarRank;
+
     private String Token;
+
     private Retrofit retrofit = new Retrofit.Builder()
             .baseUrl("https://outer-space-manager-staging.herokuapp.com")
             .addConverterFactory(GsonConverterFactory.create())
             .build();
     private ApiService service = retrofit.create(ApiService.class);
 
+    private Integer beginUser = 11;
+    private Integer endUser = 20;
+    private Integer intervalUser = 10;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_rank,container,false);
         Token = getActivity().getIntent().getExtras().getString("TOKEN");
+
         progressBarRank = (ProgressBar) view.findViewById(R.id.progressBarFragRank);
         recyclerRank = (RecyclerView) view.findViewById(R.id.recyclerRank);
+
         recyclerRank.setHasFixedSize(true);
+
         layoutManager = new LinearLayoutManager(getContext());
         recyclerRank.setLayoutManager(layoutManager);
-        adapterRank = new RecyclerRankAdapter(listRank);
+
+        adapterRank = new RecyclerRankAdapter(listRank, new LoadData() {
+            @Override
+            public void onLoadMore(int position) {
+                progressBarRank.setVisibility(View.VISIBLE);
+                updateUser(position);
+            }
+        });
         recyclerRank.setAdapter(adapterRank);
         loadUser();
         return  view;
     }
 
+    private void updateUser(int skip) {
+
+        Call<ResponseListUsers> rank = service.getRank(Token, beginUser, endUser);
+        rank.enqueue(new Callback<ResponseListUsers>() {
+            @Override
+            public void onResponse(Call<ResponseListUsers> call, Response<ResponseListUsers> response) {
+
+                ResponseListUsers responseRank = response.body();
+                if(response.code() == 200){
+                    adapterRank.setLoaded();
+                    adapterRank.update(responseRank.getRank());
+                    beginUser = beginUser + intervalUser;
+                    endUser = endUser + intervalUser;
+                }
+                progressBarRank.setVisibility(View.GONE);
+            }
+
+            @Override
+            public void onFailure(Call<ResponseListUsers> call, Throwable t) {
+
+            }
+        });
+    }
+
     private void loadUser() {
-        Call<ResponseListUsers> rank = service.getRank(Token, 0, 20);
+        Call<ResponseListUsers> rank = service.getRank(Token, 0, intervalUser);
         rank.enqueue(new Callback<ResponseListUsers>() {
             @Override
             public void onResponse(Call<ResponseListUsers> call, Response<ResponseListUsers> response) {
                 progressBarRank.setVisibility(View.GONE);
+
                 ResponseListUsers responseRank = response.body();
-                listRank = responseRank.getRank();
+                listRank.clear();
+                listRank.addAll(responseRank.getRank());
                 adapterRank.notifyDataSetChanged();
             }
 

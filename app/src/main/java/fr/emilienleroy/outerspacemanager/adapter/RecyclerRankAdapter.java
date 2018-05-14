@@ -1,8 +1,11 @@
 package fr.emilienleroy.outerspacemanager.adapter;
 
+import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import java.util.List;
@@ -17,48 +20,75 @@ import fr.emilienleroy.outerspacemanager.models.ApiUser;
 public class RecyclerRankAdapter extends RecyclerView.Adapter<RecyclerRankAdapter.ViewHolder> {
 
     private List<ApiUser> listRank;
+    private final int VIEW_ITEM = 1;
+    private final int VIEW_PROG = 0;
+    private LoadData loadData;
+    private boolean loading = false;
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
-        // each data item is just a string in this case
         public TextView name;
         public TextView points;
-        public ViewHolder(TextView v) {
+
+        public ViewHolder(View v) {
             super(v);
             name = (TextView) v.findViewById(R.id.name);
             points = (TextView) v.findViewById(R.id.points);
         }
     }
 
-    // Provide a suitable constructor (depends on the kind of dataset)
-    public RecyclerRankAdapter(List<ApiUser> myDataset) {
+    public RecyclerRankAdapter(List<ApiUser> myDataset,LoadData onLoadData) {
         listRank = myDataset;
+        loadData = onLoadData;
     }
 
-    // Create new views (invoked by the layout manager)
     @Override
     public RecyclerRankAdapter.ViewHolder onCreateViewHolder(ViewGroup parent,
                                                    int viewType) {
-        // create a new view
-        TextView v = (TextView) LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.row_rank, parent, false);
-        ViewHolder vh = new ViewHolder(v);
-        return vh;
+        Context context = parent.getContext();
+        LayoutInflater inflater = LayoutInflater.from(context);
+
+
+        View rankView = inflater.inflate(R.layout.row_rank, parent, false);
+
+        ViewHolder viewHolder = new ViewHolder(rankView);
+        return viewHolder;
     }
 
-    // Replace the contents of a view (invoked by the layout manager)
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        // - get element from your dataset at this position
-        // - replace the contents of the view with that element
-        ApiUser user = listRank.get(position);
-        holder.name.setText(user.getUser());
-        holder.points.setText(user.getPoints().toString());
-
+        if (holder instanceof ViewHolder) {
+            ApiUser user = listRank.get(position);
+            holder.name.setText(user.getUser());
+            holder.points.setText(user.getPoints().toString());
+            if (!loading && position == listRank.size()-1) {
+                // End has been reached
+                // Do something
+                if (loadData != null) {
+                    loadData.onLoadMore(position);
+                }
+                loading = true;
+            }
+        }
     }
 
-    // Return the size of your dataset (invoked by the layout manager)
     @Override
     public int getItemCount() {
         return listRank.size();
     }
+
+    public void setLoaded() {
+        loading = false;
+    }
+
+    @Override
+    public int getItemViewType(int position) {
+        return listRank.get(position) != null ? VIEW_ITEM : VIEW_PROG;
+    }
+
+    public void update(List<ApiUser> newItems){
+        listRank.addAll(newItems);
+        notifyDataSetChanged();
+    }
+
+
 }
